@@ -1,0 +1,24 @@
+name: TelegramAuth
+version: 1.0.0
+main: ru.example.telegramauth.TelegramAuthPlugin
+api-version: 1.16
+author: YourName
+description: Telegram authentication with freeze system
+
+commands:
+  link:
+    description: Get link code for Telegram binding
+    usage: /link
+    aliases: [tg, telegram]
+  telegramauth:
+    description: Admin command for TelegramAuth
+    usage: /telegramauth reload
+    permission: telegramauth.admin
+
+permissions:
+  telegramauth.admin:
+    description: Allows using admin commands
+    default: op
+  telegramauth.bypass:
+    description: Bypass Telegram authentication
+    default: false
