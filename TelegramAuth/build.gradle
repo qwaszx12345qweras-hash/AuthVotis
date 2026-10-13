@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'ru.example'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://repo.papermc.io/repository/maven-public/' }
+}
+
+dependencies {
+    compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
+    implementation 'org.telegram:telegrambots:6.9.7.1'
+    implementation 'org.xerial:sqlite-jdbc:3.42.0.0'
+    implementation 'com.zaxxer:HikariCP:4.0.3'
+    implementation 'mysql:mysql-connector-java:8.0.33'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 8
+}
+
+shadowJar {
+    archiveBaseName.set('TelegramAuth')
+    archiveClassifier.set('')
+    archiveVersion.set(project.version)
+}
+
+build.dependsOn shadowJar

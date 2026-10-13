@@ -1,0 +1,153 @@
+# ============================================================
+# TelegramAuth Configuration
+# ============================================================
+
+# --- Telegram Bot Settings ---
+telegram:
+  # Bot token from @BotFather
+  bot-token: "YOUR_BOT_TOKEN_HERE"
+  # Bot username (without @)
+  bot-username: "your_bot_username"
+  # Admin chat ID for notifications (-100 for groups)
+  admin-chat-id: 0
+  # Enable debug logging
+  debug: false
+  # Delay between message processing (ms)
+  delay: 50
+
+# --- Storage Settings ---
+storage:
+  # Storage type: YAML, SQLITE, or MYSQL
+  type: SQLITE
+
+  # MySQL settings (only used when type is MYSQL)
+  mysql:
+    host: localhost
+    port: 3306
+    database: telegramauth
+    username: root
+    password: password
+    useSSL: false
+    max-pool-size: 10
+    connection-timeout: 30000
+
+# --- Security Settings ---
+security:
+  # Length of the link code
+  code-length: 6
+  # Code lifetime in seconds
+  code-lifetime: 300
+  # Maximum attempts to enter the code
+  max-attempts: 3
+  # Strict mode - kick if not linked after timeout
+  strict-mode: true
+  # Session timeout in seconds (how long session is valid)
+  session-timeout: 86400
+  # Bind session to IP address
+  bind-to-ip: false
+  # Kick timeout in seconds (time to confirm login via Telegram)
+  kick-timeout: 120
+
+# --- Freeze Settings ---
+freeze:
+  # Block player movement
+  movement: true
+  # Block chat messages
+  chat: true
+  # Block all commands except allowed
+  commands: true
+  # Block block interaction (right-click)
+  interact: true
+  # Block item use (eating, potions, etc.)
+  item-use: true
+  # Block dropping items
+  drop: true
+  # Block picking up items
+  pickup: true
+  # Block opening inventories
+  inventory: true
+  # Block receiving damage
+  damage: true
+  # Block dealing damage
+  deal-damage: true
+  # Block mob targeting
+  mob-target: true
+  # Block portal usage
+  portals: true
+  # Block sleeping in beds
+  sleep: true
+  # Block entering vehicles
+  vehicle: true
+  # Block block breaking
+  block-break: true
+  # Block block placing
+  block-place: true
+  # Give blindness effect
+  blindness-effect: true
+  # Give invisibility effect
+  invisibility-effect: true
+
+# --- Allowed Commands (when freeze is active) ---
+allowed-commands:
+  - "/link"
+  - "/tg"
+  - "/telegram"
+  - "/msg"
+  - "/tell"
+  - "/whisper"
+  - "/w"
+  - "/r"
+
+# --- Messages ---
+messages:
+  prefix: "&8[&bTelegramAuth&8] &r"
+  
+  # Messages when player joins
+  join-frozen: "&cВы не авторизованы! Используйте &e/link &cдля привязки Telegram."
+  join-frozen-title: "&c&lЗАМОРОЖЕН"
+  join-frozen-subtitle: "&7Используйте /link для авторизации"
+  
+  # Link command messages
+  link-code-generated: "&aВаш код для привязки: &e&l{code}\n&aОтправьте боту &e@{bot} &aкоманду: &e/link {code}\n&7Код действителен {time} секунд."
+  link-already-bound: "&aВаш аккаунт уже привязан к Telegram!"
+  link-code-expired: "&cВремя действия кода истекло. Сгенерируйте новый командой &e/link"
+  link-cooldown: "&cПодождите &e{time} &cсекунд перед генерацией нового кода."
+  
+  # Telegram bot messages
+  tg-welcome: "&aДобро пожаловать в TelegramAuth!\n\nДля привязки аккаунта отправьте:\n&b/link <код>\n\nКод можно получить на сервере командой &b/link"
+  tg-linked-success: "&a✅ Аккаунт успешно привязан!\nТеперь при входе на сервер вам придёт запрос подтверждения."
+  tg-already-linked: "&cЭтот аккаунт уже привязан к другому игроку.\nИспользуйте /unlink для отвязки."
+  tg-code-invalid: "&cНеверный или истёкший код. Получите новый на сервере командой /link"
+  tg-code-used: "&cЭтот код уже был использован."
+  tg-confirm-login: "&e⚠️ Запрос входа на сервер\nИгрок: &b{player}\n\nПодтвердите вход:"
+  tg-login-confirmed: "&a✅ Вход подтверждён! Приятной игры."
+  tg-login-denied: "&c❌ Вход отклонён. Игрок будет кикнут."
+  tg-login-timeout: "&c⏰ Время подтверждения истекло. Игрок кикнут."
+  
+  # Confirm/Deny buttons
+  tg-button-confirm: "✅ Подтвердить"
+  tg-button-deny: "❌ Отклонить"
+  
+  # Kick messages
+  kick-not-confirmed: "&cВы не подтвердили вход в Telegram за отведённое время!"
+  kick-not-linked: "&cВы не привязали Telegram аккаунт!\nИспользуйте /link на сервере."
+  kick-denied: "&cВход был отклонён через Telegram."
+  
+  # Admin messages
+  admin-reload: "&aКонфигурация перезагружена!"
+  admin-no-permission: "&cУ вас нет прав для выполнения этой команды!"
+  admin-unlinked: "&aПривязка игрока &e{player} &aудалена."
+  admin-player-not-found: "&cИгрок не найден!"
+  
+  # General
+  code-expired: "&cВаш код истёк. Используйте &e/link &cдля получения нового."
+  max-attempts-reached: "&cПревышено количество попыток. Подождите."
+
+# --- Integrations ---
+integrations:
+  # PlaceholderAPI support
+  placeholderapi: true
+  # Vault support (for permission groups)
+  vault: true
+  # Check for updates on startup
+  update-checker: true
